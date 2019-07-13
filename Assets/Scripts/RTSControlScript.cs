@@ -2,7 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RTSSelectScript : MonoBehaviour {
+public class RTSControlScript : MonoBehaviour {
+
+    #region Observer Pattern
+    [SerializeField]
+    private List<IObserver> _observers;
+
+    public void Attach(IObserver obs)
+    {
+        _observers.Add(obs);
+    }
+
+    public void Detach(IObserver obs)
+    {
+        _observers.Remove(obs);
+    }
+
+    private void Notify()
+    {
+        foreach(IObserver obs in _observers)
+        {
+            obs.Notify();
+        }
+    }
+    #endregion
+
 
     [SerializeField]
     private LayerMask clickableLayer;
@@ -20,6 +44,7 @@ public class RTSSelectScript : MonoBehaviour {
     {
         selectedUnits = new List<Selectable>();
         selectableUnits = new List<Selectable>();
+        observers = new List<IObserver>();
     }
 	
 	// Update is called once per frame

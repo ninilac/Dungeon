@@ -38,7 +38,7 @@ public class SelectableUnit : Selectable {
         SelectArrowObject = Instantiate(SelectArrow, pos, Quaternion.identity);
         SelectArrowObject.transform.SetParent(transform, true);
 
-        Camera.main.gameObject.GetComponent<RTSSelectScript>().selectableUnits.Add(this);
+        Camera.main.gameObject.GetComponent<RTSControlScript>().selectableUnits.Add(this);
 
         rb.velocity = Vector2.zero;
 
